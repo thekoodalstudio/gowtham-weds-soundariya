@@ -55,11 +55,18 @@ export const INVITATION_DATA = {
     embedMapsSearch: "ARS Mahal, Vriddhachalam"
   },
 
+  brideRsvp: {
+    name: "Soundariya",
+    phone: "6380126821",
+    formattedPhone: "+91 63801 26821",
+    whatsappUrl: "https://wa.me/916380126821?text=Dear%20Soundariya,%20Heartiest%20congratulations%20on%20your%20wedding!%20%F0%9F%92%8D%E2%9D%A4%EF%B8%8F%20May%20this%20beautiful%20new%20chapter%20be%20filled%20with%20endless%20love,%20laughter,%20and%20divine%20blessings.%20Looking%20forward%20to%20celebrating%20with%20you%20at%20ARS%20Mahal!"
+  },
+
   inviter: {
     name: "Shanmuganathan",
     phone: "7339267816",
     formattedPhone: "+91 73392 67816",
-    whatsappUrl: "https://wa.me/917339267816?text=Dear%20Shanmuganathan,%20Heartiest%20congratulations%20to%20Gowtham%20Raj%20and%20Soundariya!%20May%20God%20shower%20them%20with%20endless%20love,%20health,%20and%20happiness.%20Looking%20forward%20to%20celebrating%20with%20you!"
+    whatsappUrl: "https://wa.me/917339267816?text=Dear%20Shanmuganathan,%20Heartiest%20congratulations%20to%20Gowtham%20Raj%20and%20Soundariya!%20Looking%20forward%20to%20celebrating%20with%20you!"
   },
 
   closingMessage: {

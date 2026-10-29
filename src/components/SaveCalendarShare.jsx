@@ -5,7 +5,7 @@ import confetti from 'canvas-confetti';
 
 export default function SaveCalendarShare({ onOpenCardModal }) {
   const [isCopied, setIsCopied] = useState(false);
-  const { inviter, closingMessage } = INVITATION_DATA;
+  const { inviter, brideRsvp, closingMessage } = INVITATION_DATA;
 
   // Add to Google Calendar handler
   const handleGoogleCalendar = () => {
@@ -20,34 +20,29 @@ export default function SaveCalendarShare({ onOpenCardModal }) {
     window.open(url, '_blank');
   };
 
-  // Download ICS File for Apple / Outlook
-  const handleIcsDownload = () => {
-    const icsContent = [
-      'BEGIN:VCALENDAR',
-      'VERSION:2.0',
-      'PRODID:-//The Koodal Studio//Wedding Invitation//EN',
-      'CALSCALE:GREGORIAN',
-      'BEGIN:VEVENT',
-      'SUMMARY:Wedding Ceremony - Gowtham Raj & Soundariya',
-      'DESCRIPTION:Wedding of Gowtham Raj. P and Soundariya. P\\nReception: 19th Nov 6 PM onwards\\nWedding: 20th Nov 9:15 AM onwards',
-      'LOCATION:ARS Mahal\\, Vriddhachalam',
-      'DTSTART:20261120T034500Z',
-      'DTEND:20261120T083000Z',
-      'STATUS:CONFIRMED',
-      'END:VEVENT',
-      'END:VCALENDAR'
-    ].join('\r\n');
+  // WhatsApp Share Invite handler
+  const handleWhatsAppShare = () => {
+    confetti({
+      particleCount: 60,
+      spread: 60,
+      origin: { y: 0.8 },
+      colors: ['#c99a4c', '#e27284', '#681321']
+    });
 
-    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.setAttribute('download', 'Gowtham-Soundariya-Wedding.ics');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const shareText = encodeURIComponent(
+      `💌 With a Happy Heart, Here's My Invitation❤️💍\n\n` +
+      `A beautiful new chapter is about to begin… 🥹✨\n` +
+      `Yes, I'm getting married 💃🏻💍❤️\n\n` +
+      `💐 Reception: 19th November 2026 (Thursday) | 6:00 PM onwards\n` +
+      `💍 Wedding: 20th November 2026 (Friday) | 9:15 AM onwards\n` +
+      `📍 Venue: ARS Mahal, Vriddhachalam\n\n` +
+      `View our digital animated invitation here: ${window.location.href}`
+    );
+
+    window.open(`https://api.whatsapp.com/send?text=${shareText}`, '_blank');
   };
 
-  // Share Invitation handler
+  // Generic Share or Copy Link handler
   const handleShare = async () => {
     try {
       confetti({
@@ -83,15 +78,44 @@ export default function SaveCalendarShare({ onOpenCardModal }) {
         <p className="closing-personal-note">
           {closingMessage.closingNote}
         </p>
-        <div className="inviter-line">
-          <span>Invited by: </span>
-          <strong>{inviter.name}</strong>
-          <span className="inviter-phone">({inviter.formattedPhone})</span>
+        <div className="contact-info-pills">
+          <div className="contact-pill">
+            <span>RSVP & Wishes: </span>
+            <strong>{brideRsvp.name}</strong>
+            <a href={`tel:${brideRsvp.phone}`} className="contact-link">{brideRsvp.formattedPhone}</a>
+          </div>
+          <div className="contact-pill sub-pill">
+            <span>Invited by: </span>
+            <strong>{inviter.name}</strong>
+            <a href={`tel:${inviter.phone}`} className="contact-link">{inviter.formattedPhone}</a>
+          </div>
         </div>
       </div>
 
       {/* Action Buttons Grid */}
       <div className="action-buttons-grid">
+        {/* Direct One-Tap WhatsApp Wishes to Soundariya */}
+        <a
+          href={brideRsvp.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-royal btn-whatsapp"
+        >
+          <MessageCircle size={18} />
+          <span>Send Wishes to Soundariya</span>
+        </a>
+
+        {/* Share Invite directly to WhatsApp */}
+        <button
+          type="button"
+          onClick={handleWhatsAppShare}
+          className="btn-royal btn-whatsapp-share"
+        >
+          <Share2 size={16} />
+          <span>Share on WhatsApp</span>
+        </button>
+
+        {/* Save to Calendar */}
         <button
           type="button"
           onClick={handleGoogleCalendar}
@@ -101,25 +125,7 @@ export default function SaveCalendarShare({ onOpenCardModal }) {
           <span>Save to Calendar</span>
         </button>
 
-        <a
-          href={inviter.whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-royal"
-        >
-          <MessageCircle size={16} />
-          <span>Send Blessings on WhatsApp</span>
-        </a>
-
-        <button
-          type="button"
-          onClick={handleShare}
-          className="btn-royal btn-outline"
-        >
-          {isCopied ? <Check size={16} /> : <Share2 size={16} />}
-          <span>{isCopied ? 'Link Copied!' : 'Share Invitation'}</span>
-        </button>
-
+        {/* View Original Physical Card */}
         <button
           type="button"
           onClick={onOpenCardModal}
@@ -161,21 +167,60 @@ export default function SaveCalendarShare({ onOpenCardModal }) {
           margin-bottom: 0.8rem;
         }
 
-        .inviter-line {
+        .contact-info-pills {
+          display: flex;
+          flex-direction: column;
+          gap: 0.4rem;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .contact-pill {
           font-family: var(--font-sans);
           font-size: 0.85rem;
           color: var(--color-text-muted);
         }
 
-        .inviter-line strong {
+        .contact-pill.sub-pill {
+          font-size: 0.78rem;
+          opacity: 0.88;
+        }
+
+        .contact-pill strong {
           color: var(--color-maroon);
           font-weight: 700;
         }
 
-        .inviter-phone {
-          margin-left: 0.3rem;
+        .contact-link {
+          margin-left: 0.35rem;
           color: var(--color-gold-dark);
           font-weight: 600;
+          text-decoration: none;
+        }
+
+        .contact-link:hover {
+          text-decoration: underline;
+        }
+
+        .btn-whatsapp {
+          background: linear-gradient(135deg, #1e7e43 0%, #155d31 100%);
+          border-color: #48c774;
+          box-shadow: 0 4px 16px rgba(30, 126, 67, 0.28);
+        }
+
+        .btn-whatsapp:hover {
+          background: linear-gradient(135deg, #239650 0%, #1b6f3c 100%);
+          border-color: #6fe096;
+          box-shadow: 0 6px 22px rgba(30, 126, 67, 0.4);
+        }
+
+        .btn-whatsapp-share {
+          background: linear-gradient(135deg, var(--color-maroon) 0%, var(--color-maroon-dark) 100%);
+          border-color: var(--color-gold);
+        }
+
+        .btn-whatsapp-share:hover {
+          background: linear-gradient(135deg, var(--color-maroon-light) 0%, var(--color-maroon) 100%);
         }
 
         .action-buttons-grid {
