@@ -1,0 +1,209 @@
+:root {
+  --color-maroon: #681321;
+  --color-maroon-dark: #4a0c16;
+  --color-maroon-light: #871f30;
+  --color-gold: #c99a4c;
+  --color-gold-light: #e6be75;
+  --color-gold-bright: #f3d48d;
+  --color-gold-dark: #9f7530;
+  --color-cream: #fcf9f2;
+  --color-cream-card: rgba(255, 253, 249, 0.94);
+  --color-parchment: #f6efe2;
+  --color-rose: #e8a8ad;
+  --color-rose-soft: rgba(232, 168, 173, 0.18);
+  --color-text-dark: #2b171a;
+  --color-text-muted: #5e464a;
+  
+  --font-royal: 'Cinzel', serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
+  
+  --shadow-gold: 0 10px 35px -5px rgba(201, 154, 76, 0.25);
+  --shadow-card: 0 15px 40px -10px rgba(74, 12, 22, 0.12), 0 0 0 1px rgba(201, 154, 76, 0.35);
+  --shadow-elevation: 0 25px 60px -15px rgba(74, 12, 22, 0.18);
+  
+  --radius-royal: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-parchment);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-dark);
+  background: radial-gradient(circle at 50% 0%, #fff7ec 0%, #f7efe2 50%, #f0e3ce 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+}
+
+/* Base Container */
+.app-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: 3rem;
+}
+
+.invitation-main {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .invitation-main {
+    padding: 2.5rem 1.5rem;
+  }
+}
+
+/* Card Container with Royal Arch Style */
+.royal-card {
+  background: var(--color-cream-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-royal);
+  border: 1.5px solid rgba(201, 154, 76, 0.45);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  padding: 2.2rem 1.5rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .royal-card {
+    padding: 3rem 2.5rem;
+  }
+}
+
+/* Ornate Inner Double Border */
+.royal-card::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px dashed rgba(201, 154, 76, 0.4);
+  border-radius: calc(var(--radius-royal) - 6px);
+  pointer-events: none;
+}
+
+/* Buttons */
+.btn-royal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, var(--color-maroon) 0%, var(--color-maroon-dark) 100%);
+  color: #fff;
+  border: 1px solid var(--color-gold);
+  border-radius: 9999px;
+  padding: 0.85rem 1.6rem;
+  font-family: var(--font-royal);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(104, 19, 33, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-royal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(104, 19, 33, 0.35);
+  background: linear-gradient(135deg, var(--color-maroon-light) 0%, var(--color-maroon) 100%);
+  border-color: var(--color-gold-light);
+}
+
+.btn-royal:active {
+  transform: translateY(0);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #d4a656 0%, #b88636 100%);
+  color: #2b1216;
+  border: 1px solid #f3d48d;
+  box-shadow: 0 4px 15px rgba(201, 154, 76, 0.3);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #e3ba6c 0%, #c49240 100%);
+  box-shadow: 0 8px 22px rgba(201, 154, 76, 0.45);
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--color-maroon);
+  border: 1px solid rgba(201, 154, 76, 0.6);
+}
+
+.btn-outline:hover {
+  background: #fff;
+  border-color: var(--color-maroon);
+  color: var(--color-maroon-dark);
+}
+
+/* Badges */
+.badge-gold {
+  display: inline-block;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.7rem;
+  font-family: var(--font-royal);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  background: rgba(201, 154, 76, 0.12);
+  border: 1px solid rgba(201, 154, 76, 0.35);
+  border-radius: 9999px;
+}
+
+/* Floral Divider */
+.floral-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+  color: var(--color-gold);
+}
+
+.floral-divider::before,
+.floral-divider::after {
+  content: '';
+  flex: 1;
+  max-width: 90px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+/* Golden Motif Icon */
+.motif-symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gold);
+}

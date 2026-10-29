@@ -1,0 +1,169 @@
+/* Keyframe Animations */
+
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 6px rgba(201, 154, 76, 0.4));
+  }
+  50% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 14px rgba(201, 154, 76, 0.8));
+  }
+}
+
+@keyframes shimmerText {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(1deg);
+  }
+}
+
+@keyframes bellSwing {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(3deg);
+  }
+  75% {
+    transform: rotate(-3deg);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.8s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
+.animate-bell {
+  transform-origin: top center;
+  animation: bellSwing 3.5s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 12s linear infinite;
+}
+
+.animate-fade-in {
+  animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Shimmer Calligraphy Name Style */
+.calligraphy-name {
+  font-family: var(--font-script);
+  font-size: clamp(2.8rem, 8vw, 4.2rem);
+  line-height: 1.15;
+  color: var(--color-maroon);
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 2px 4px rgba(104, 19, 33, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.calligraphy-name:hover {
+  transform: scale(1.03);
+}
+
+.calligraphy-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-maroon) 0%,
+    var(--color-maroon-light) 30%,
+    var(--color-gold-bright) 50%,
+    var(--color-maroon-light) 70%,
+    var(--color-maroon) 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmerText 5s linear infinite;
+}
+
+/* Interlocking Rings Heart Container */
+.rings-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.2rem 0;
+  position: relative;
+}
+
+.rings-icon {
+  width: 44px;
+  height: 44px;
+  color: var(--color-gold);
+  filter: drop-shadow(0 2px 8px rgba(201, 154, 76, 0.4));
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Background Canvas Overlay */
+.particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Floating Audio Button */
+.floating-audio-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-maroon) 0%, var(--color-maroon-dark) 100%);
+  border: 1.5px solid var(--color-gold-light);
+  color: var(--color-gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(74, 12, 22, 0.35);
+  cursor: pointer;
+  z-index: 999;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-audio-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 30px rgba(201, 154, 76, 0.5);
+  color: #fff;
+}
