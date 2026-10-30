@@ -1,4 +1,5 @@
 {
+  "name": "gowtham-weds-soundariya",
   "rewrites": [
     {
       "source": "/(.*)",
