@@ -5,7 +5,7 @@ import confetti from 'canvas-confetti';
 
 export default function SaveCalendarShare({ onOpenCardModal }) {
   const [isCopied, setIsCopied] = useState(false);
-  const { inviter, brideRsvp, closingMessage } = INVITATION_DATA;
+  const { groomRsvp, brideRsvp, closingMessage } = INVITATION_DATA;
 
   // Add to Google Calendar handler
   const handleGoogleCalendar = () => {
@@ -80,14 +80,14 @@ export default function SaveCalendarShare({ onOpenCardModal }) {
         </p>
         <div className="contact-info-pills">
           <div className="contact-pill">
-            <span>RSVP & Wishes: </span>
+            <span>Bride: </span>
             <strong>{brideRsvp.name}</strong>
             <a href={`tel:${brideRsvp.phone}`} className="contact-link">{brideRsvp.formattedPhone}</a>
           </div>
-          <div className="contact-pill sub-pill">
-            <span>Invited by: </span>
-            <strong>{inviter.name}</strong>
-            <a href={`tel:${inviter.phone}`} className="contact-link">{inviter.formattedPhone}</a>
+          <div className="contact-pill">
+            <span>Groom: </span>
+            <strong>{groomRsvp.name}</strong>
+            <a href={`tel:${groomRsvp.phone}`} className="contact-link">{groomRsvp.formattedPhone}</a>
           </div>
         </div>
       </div>
@@ -103,6 +103,17 @@ export default function SaveCalendarShare({ onOpenCardModal }) {
         >
           <MessageCircle size={18} />
           <span>Send Wishes to Soundariya</span>
+        </a>
+
+        {/* Direct One-Tap WhatsApp Wishes to Gowtham Raj */}
+        <a
+          href={groomRsvp.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-royal btn-whatsapp"
+        >
+          <MessageCircle size={18} />
+          <span>Send Wishes to Gowtham Raj</span>
         </a>
 
         {/* Share Invite directly to WhatsApp */}
@@ -129,7 +140,7 @@ export default function SaveCalendarShare({ onOpenCardModal }) {
         <button
           type="button"
           onClick={onOpenCardModal}
-          className="btn-royal btn-outline"
+          className="btn-royal btn-outline full-span-mobile"
         >
           <Eye size={16} />
           <span>View Original Card</span>
@@ -169,8 +180,8 @@ export default function SaveCalendarShare({ onOpenCardModal }) {
 
         .contact-info-pills {
           display: flex;
-          flex-direction: column;
-          gap: 0.4rem;
+          flex-wrap: wrap;
+          gap: 0.6rem 1.2rem;
           align-items: center;
           justify-content: center;
         }
@@ -179,11 +190,10 @@ export default function SaveCalendarShare({ onOpenCardModal }) {
           font-family: var(--font-sans);
           font-size: 0.85rem;
           color: var(--color-text-muted);
-        }
-
-        .contact-pill.sub-pill {
-          font-size: 0.78rem;
-          opacity: 0.88;
+          background: rgba(255, 255, 255, 0.65);
+          padding: 0.35rem 0.85rem;
+          border-radius: 9999px;
+          border: 1px solid rgba(201, 154, 76, 0.3);
         }
 
         .contact-pill strong {
@@ -232,6 +242,10 @@ export default function SaveCalendarShare({ onOpenCardModal }) {
         @media (min-width: 520px) {
           .action-buttons-grid {
             grid-template-columns: 1fr 1fr;
+          }
+
+          .full-span-mobile {
+            grid-column: 1 / -1;
           }
         }
       `}</style>
